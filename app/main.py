@@ -21,7 +21,7 @@ JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "CHANGE_ME_SECRET")
 JWT_ALG = "HS256"
 ACCESS_MIN = int(os.getenv("ACCESS_MIN", "1440"))
 
-PG_HOST = os.getenv("POSTGRES_HOST", "localhost")
+PG_HOST = os.getenv("POSTGRES_HOST", "postgres")
 PG_PORT = int(os.getenv("POSTGRES_PORT", "5432"))
 PG_DB   = os.getenv("POSTGRES_DB", "docutrack")
 PG_USER = os.getenv("POSTGRES_USER", "docu_user")
@@ -45,8 +45,10 @@ class Role(str, Enum):
 
 class RequestStatus(str, Enum):
     RECEIVED = "RECEIVED"
-    VALIDATION = "VALIDATION"
+    DATABASE_URL = os.getenv("DATABASE_URL") or f"postgresql+psycopg2://{PG_USER}:{PG_PASS}@{PG_HOST}:{PG_PORT}/{PG_DB}"
     APPROVED = "APPROVED"
+    # Puerto configurable para Render
+    APP_PORT = int(os.getenv("PORT", "8000"))
     REJECTED = "REJECTED"
     CORRECTION_REQUESTED = "CORRECTION_REQUESTED"
     ISSUED = "ISSUED"

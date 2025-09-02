@@ -193,8 +193,8 @@ def startup():
     Base.metadata.create_all(bind=engine)
     db = SessionLocal()
     try:
-        if not db.query(User).filter(User.email=="admin@demo.test").first():
-            db.add(User(email="admin@demo.test", password_hash=hash_password("admin123"), role=Role.ADMIN))
+        if not db.query(User).filter(User.email=="admin@demo.com").first():
+            db.add(User(email="admin@demo.com", password_hash=hash_password("admin123"), role=Role.ADMIN))
             db.commit()
     finally:
         db.close()

@@ -27,7 +27,7 @@ PG_DB   = os.getenv("POSTGRES_DB", "docutrack")
 PG_USER = os.getenv("POSTGRES_USER", "docu_user")
 PG_PASS = os.getenv("POSTGRES_PASSWORD", "docu_pass")
 
-DATABASE_URL = f"postgresql+psycopg2://{PG_USER}:{PG_PASS}@{PG_HOST}:{PG_PORT}/{PG_DB}"
+DATABASE_URL = os.getenv("DATABASE_URL") or f"postgresql+psycopg2://{PG_USER}:{PG_PASS}@{PG_HOST}:{PG_PORT}/{PG_DB}"
 
 UPLOAD_DIR = Path("./data/uploads")
 CERT_DIR = Path("./data/certificates")
